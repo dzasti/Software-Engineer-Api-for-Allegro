@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.allegro.github.service.GithubUserService;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @RestController
 @RequestMapping("/")
@@ -23,12 +22,17 @@ public class GithubUserController {
     }
 
     @GetMapping(value = "repositories",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getRepositoriesWithStars(@RequestParam @NotBlank @Size(min = 1) String name) {
+    public String getRepositoriesWithStars(@RequestParam @NotBlank String name) {
         return githubUserService.getRepos(name);
     }
 
     @GetMapping(value = "stars",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getTotalStarsAmount(@RequestParam @NotBlank @Size(min = 1)  String name) {
+    public String getTotalStarsAmount(@RequestParam @NotBlank String name) {
         return githubUserService.getTotalStarsAmount(name);
+    }
+
+    @GetMapping(value = "languages",produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getLanguages(@RequestParam @NotBlank String name) {
+        return githubUserService.getLanguages(name);
     }
 }
