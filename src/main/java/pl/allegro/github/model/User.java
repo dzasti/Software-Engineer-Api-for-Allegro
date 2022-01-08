@@ -1,5 +1,6 @@
 package pl.allegro.github.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.util.ArrayList;
@@ -7,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Getter
 @NoArgsConstructor
 public class User {
 
+    @Getter
     private List<Repository> repositories;
+    @Getter
+    @SerializedName(value = "amount", alternate = "amount")
     private int totalStarsAmount;
     private List<Language> languages;
 

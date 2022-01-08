@@ -1,7 +1,6 @@
 package pl.allegro.github.service;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Service;
 import pl.allegro.github.model.GithubApi;
