@@ -20,7 +20,7 @@ public class GithubUserService {
         return new Gson().toJson(user.getTotalStarsAmount());
     }
 
-    public String getRepos(String userName) {
+    public String getRepositoriesWithStars(String userName) {
         User user = createUser(userName);
 
         return new Gson().toJson(user.getRepositories());
