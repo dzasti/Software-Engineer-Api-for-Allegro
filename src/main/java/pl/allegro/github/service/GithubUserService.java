@@ -33,7 +33,7 @@ public class GithubUserService {
         return user.getCountedLanguages();
     }
 
-    private User createUser(String userName) {
+    public User createUser(String userName) {
         Type repositoriesType = new TypeToken<ArrayList<Repository>>(){}.getType();
         List<Repository> repositories = new Gson().fromJson(
                 GithubApi.getRepositoriesJson(userName), repositoriesType);

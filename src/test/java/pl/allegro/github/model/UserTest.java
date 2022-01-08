@@ -3,8 +3,6 @@ package pl.allegro.github.model;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.util.List;
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserTest {
@@ -24,7 +22,7 @@ class UserTest {
     }
 
     @Test
-    void userShouldHave2PythonAnd1JavaCountedLanguage() {
+    void userShouldHave2PythonAnd1JavaCountedLanguages() {
         assertEquals(2,user.getCountedLanguages().get("Python"));
         assertEquals(1,user.getCountedLanguages().get("Java"));
     }
