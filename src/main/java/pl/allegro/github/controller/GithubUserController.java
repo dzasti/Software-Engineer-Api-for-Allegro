@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.allegro.github.service.GithubUserService;
 import javax.validation.constraints.NotBlank;
 
-
 @RestController
 @RequestMapping("/{user}")
 @Validated
@@ -27,12 +26,12 @@ public class GithubUserController {
     }
 
     @GetMapping(value = "stars",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getTotalStarsAmount(@PathVariable @NotBlank String user) {
-        return githubUserService.getTotalStarsAmount(user);
+    public ResponseEntity getTotalStarsAmount(@PathVariable @NotBlank String user) {
+        return new ResponseEntity(githubUserService.getTotalStarsAmount(user), HttpStatus.OK);
     }
 
     @GetMapping(value = "languages",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getLanguages(@PathVariable @NotBlank String user) {
-        return githubUserService.getLanguages(user);
+    public ResponseEntity getLanguages(@PathVariable @NotBlank String user) {
+        return new ResponseEntity(githubUserService.getLanguages(user),HttpStatus.OK);
     }
 }

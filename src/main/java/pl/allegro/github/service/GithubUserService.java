@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 public class GithubUserService {
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public String getTotalStarsAmount(String userName) {
         User user = createUser(userName);
