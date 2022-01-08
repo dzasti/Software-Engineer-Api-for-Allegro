@@ -1,11 +1,14 @@
 package pl.allegro.github.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.allegro.github.service.GithubUserService;
 import javax.validation.constraints.NotBlank;
+
 
 @RestController
 @RequestMapping("/{user}")
@@ -19,8 +22,8 @@ public class GithubUserController {
     }
 
     @GetMapping(value = "repositories",produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getRepositoriesWithStars(@PathVariable @NotBlank String user) {
-        return githubUserService.getRepositoriesWithStars(user);
+    public ResponseEntity getRepositoriesWithStars(@PathVariable @NotBlank String user) {
+        return new ResponseEntity(githubUserService.getRepositoriesWithStars(user), HttpStatus.OK);
     }
 
     @GetMapping(value = "stars",produces = MediaType.APPLICATION_JSON_VALUE)

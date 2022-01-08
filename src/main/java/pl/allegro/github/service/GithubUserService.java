@@ -1,6 +1,7 @@
 package pl.allegro.github.service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Service;
 import pl.allegro.github.model.GithubApi;
@@ -13,23 +14,24 @@ import java.util.List;
 
 @Service
 public class GithubUserService {
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public String getTotalStarsAmount(String userName) {
         User user = createUser(userName);
 
-        return new Gson().toJson(user.getTotalStarsAmount());
+        return gson.toJson(user.getTotalStarsAmount());
     }
 
     public String getRepositoriesWithStars(String userName) {
         User user = createUser(userName);
 
-        return new Gson().toJson(user.getRepositories());
+        return gson.toJson(user.getRepositories());
     }
 
     public String getLanguages(String userName) {
         User user = createUser(userName);
-        System.out.println(user.getLanguages());
-        return new Gson().toJson(user.getCountedLanguages());
+
+        return gson.toJson(user.getCountedLanguages());
     }
 
     private User createUser(String userName) {
