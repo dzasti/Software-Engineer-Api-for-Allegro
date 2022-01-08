@@ -1,12 +1,16 @@
 package pl.allegro.github.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.allegro.github.service.GithubUserService;
+
 import javax.validation.constraints.NotBlank;
 
 @RestController
@@ -14,6 +18,7 @@ import javax.validation.constraints.NotBlank;
 @Validated
 public class GithubUserController {
     private final GithubUserService githubUserService;
+    private final static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Autowired
     public GithubUserController(GithubUserService aGithubUserService) {
@@ -21,17 +26,17 @@ public class GithubUserController {
     }
 
     @GetMapping(value = "repositories",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getRepositoriesWithStars(@PathVariable @NotBlank String user) {
-        return new ResponseEntity(githubUserService.getRepositoriesWithStars(user), HttpStatus.OK);
+    public String getRepositoriesWithStars(@PathVariable @NotBlank String user) {
+        return gson.toJson(githubUserService.getRepositoriesWithStars(user));
     }
 
     @GetMapping(value = "stars",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getTotalStarsAmount(@PathVariable @NotBlank String user) {
-        return new ResponseEntity(githubUserService.getTotalStarsAmount(user), HttpStatus.OK);
+    public String getTotalStarsAmount(@PathVariable @NotBlank String user) {
+        return gson.toJson(githubUserService.getTotalStarsAmount(user));
     }
 
     @GetMapping(value = "languages",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getLanguages(@PathVariable @NotBlank String user) {
-        return new ResponseEntity(githubUserService.getLanguages(user),HttpStatus.OK);
+    public String getLanguages(@PathVariable @NotBlank String user) {
+        return gson.toJson(githubUserService.getLanguages(user));
     }
 }

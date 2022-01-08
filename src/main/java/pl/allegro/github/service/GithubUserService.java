@@ -11,27 +11,27 @@ import pl.allegro.github.model.User;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GithubUserService {
-    private final static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public String getTotalStarsAmount(String userName) {
+    public int getTotalStarsAmount(String userName) {
         User user = createUser(userName);
 
-        return gson.toJson(user.getTotalStarsAmount());
+        return user.getTotalStarsAmount();
     }
 
-    public String getRepositoriesWithStars(String userName) {
+    public List<Repository> getRepositoriesWithStars(String userName) {
         User user = createUser(userName);
 
-        return gson.toJson(user.getRepositories());
+        return user.getRepositories();
     }
 
-    public String getLanguages(String userName) {
+    public Map<String,Long> getLanguages(String userName) {
         User user = createUser(userName);
 
-        return gson.toJson(user.getCountedLanguages());
+        return user.getCountedLanguages();
     }
 
     private User createUser(String userName) {
