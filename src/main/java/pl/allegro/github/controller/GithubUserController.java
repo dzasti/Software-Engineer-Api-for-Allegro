@@ -2,6 +2,7 @@ package pl.allegro.github.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.allegro.github.service.GithubUserService;
-
 import javax.validation.constraints.NotBlank;
 
 @RestController
@@ -32,7 +32,9 @@ public class GithubUserController {
 
     @GetMapping(value = "stars",produces = MediaType.APPLICATION_JSON_VALUE)
     public String getTotalStarsAmount(@PathVariable @NotBlank String user) {
-        return gson.toJson(githubUserService.getTotalStarsAmount(user));
+        JsonObject json = new JsonObject();
+        json.addProperty("star_count",githubUserService.getTotalStarsAmount(user));
+        return gson.toJson(json);
     }
 
     @GetMapping(value = "languages",produces = MediaType.APPLICATION_JSON_VALUE)
